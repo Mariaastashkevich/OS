@@ -48,17 +48,7 @@ void do_work(wchar_t* argv) {
 }
 int main(int argc, char* argv[]) {
 
-    /*int size = atoi(argv[0]);
-    char* arr = find_leks(*argv, size);
-    for (int i = 1; i < size + 1; i++) {
-        arr[i - 1] = *argv[i];
-    }
-    for (int i = 0; i < size; i++) {
-        cout << arr[i];
-    }
-    cout << endl;*/
-    //do_work(argv);
-    cout << argc << endl;
+    find_leks(argv[1], atoi(argv[0]));
     cout << "Press any key to continue";
     _getch();
     return 0;
