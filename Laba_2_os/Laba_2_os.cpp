@@ -18,23 +18,15 @@ int main()
   //  wchar_t lpszAppName[] = L"C:\\Users\\user\\Desktop\\Laba_2_os\\Debug\\Child.exe";
     wchar_t lpszAppName[] = L"Child.exe";
     STARTUPINFO si; // вид главного окна
-    PROCESS_INFORMATION piApp; // Структура piApp типа PROCESS_INFORMATION содержит идентификаторы и дескрипторы нового создаваемого процесса и его главного потока. Мы не используем эти дескрипторы в нашей программе и поэтому закрываем их
+    PROCESS_INFORMATION piApp; 
 
-    ZeroMemory(&si, sizeof(STARTUPINFO)); // перед запуском консольного процесса все поля структуры si типа STARTUPINFO должны заполняться нулями
-    //si - адрес блока памяти
-    // sizeof(STARTUPINFO) - длина блока памяти
+    ZeroMemory(&si, sizeof(STARTUPINFO)); 
     si.cb = sizeof(STARTUPINFO); 
     si.lpTitle = (LPWSTR)L"Child----";
-    // тут установить высоту буфера для дочернего процесса
     wcout << args;
-    // создаем новый консольный процесс
 
     if (!CreateProcessW((LPCWSTR)lpszAppName, args, nullptr, nullptr, FALSE,
         CREATE_NEW_CONSOLE, nullptr, nullptr, (LPSTARTUPINFO)&si, &piApp))
-        /* lpszAppName - определяет строку с именем exe-файла, который будет запускаться при создании нового процесса
-        // args -
-
-         */
     {
         _cputs("The new process is not created.\n"); 
         _cputs("Check a name of the process.\n"); 
@@ -43,9 +35,9 @@ int main()
         return 0;
     }
     _cputs("The new process is created.\n");
-    // ждем завершения созданного прцесса
+    
     WaitForSingleObject(piApp.hProcess, INFINITE);
-    // закрываем дескрипторы этого процесса в текущем процессе
+    
     CloseHandle(piApp.hThread);
     CloseHandle(piApp.hProcess);
 }
